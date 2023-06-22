@@ -3,7 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import api from '../shared/api';
 
-const LoginComponent = () => {
+interface ILogin {
+  onAccess: (newValue: boolean) => void;
+  setIsLogin: (newValue: boolean) => void;
+  setSignupModal: (newValue: boolean) => void;
+  setLoginModal: (newValue: boolean) => void;
+}
+
+const LoginComponent = ({
+  onAccess,
+  setIsLogin,
+  setSignupModal,
+  setLoginModal,
+}: ILogin) => {
   const [inputValue, setInputValue] = useState({
     userId: '',
     password: '',
@@ -19,6 +31,11 @@ const LoginComponent = () => {
     });
   };
 
+  const gotoSignup = () => {
+    setSignupModal(true);
+    setLoginModal(false);
+  };
+
   const loginHandle = async () => {
     try {
       const response = await api.post('/members/login', inputValue);
@@ -32,6 +49,9 @@ const LoginComponent = () => {
 
       Cookies.set('accesstoken', accessToken);
       Cookies.set('refreshtoken', refreshToken);
+
+      setIsLogin(true);
+      onAccess(false);
 
       navigate('/');
     } catch (error) {
@@ -52,6 +72,7 @@ const LoginComponent = () => {
         <button
           type="button"
           className="text-white absolute top-4 right-4 font-bold"
+          onClick={() => onAccess(false)}
         >
           닫기
         </button>
@@ -85,8 +106,12 @@ const LoginComponent = () => {
             />
           </label>
         </div>
-        <div className="flex justify-center gap-16 mt-12 mb-4">
-          <button type="button" className="text-yellow-500">
+        <div className="flex justify-center gap-16 mt-12 mb-8">
+          <button
+            type="button"
+            className="text-yellow-500"
+            onClick={gotoSignup}
+          >
             아직 Commeow 유저가 아닌가요? 회원가입
           </button>
           <button

@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../shared/api';
 
-const SignUpComponent = () => {
+interface ISignup {
+  onAccess: (newValue: boolean) => void;
+  setSignupModal: (newValue: boolean) => void;
+  setLoginModal: (newValue: boolean) => void;
+}
+
+const SignUpComponent = ({
+  onAccess,
+  setSignupModal,
+  setLoginModal,
+}: ISignup) => {
   const [inputValue, setInputValue] = useState({
     userId: '',
     nickname: '',
@@ -19,9 +29,15 @@ const SignUpComponent = () => {
     });
   };
 
+  const gotoLogin = () => {
+    setSignupModal(false);
+    setLoginModal(true);
+  };
+
   const submitSignup = async () => {
     try {
       await api.post('/members/signup', inputValue);
+      onAccess(false);
       navigate('/login');
     } catch (error) {
       console.log(error);
@@ -30,13 +46,20 @@ const SignUpComponent = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-modalOuter">
-      <div className="bg-mainBlack w-2/5 rounded-lg">
+      <div className="bg-mainBlack w-2/5 rounded-lg relative">
         <div className="flex flex-row items-center justify-center gap-5">
           <div className="bg-mainlogo bg-cover bg-center bg-no-repeat w-28 h-14" />
           <span className="text-white text-2xl font-bold">
             Commeow에 가입하세요
           </span>
         </div>
+        <button
+          type="button"
+          className="text-white absolute top-4 right-4 font-bold"
+          onClick={() => onAccess(false)}
+        >
+          닫기
+        </button>
         <div className="flex flex-col gap-6">
           <label
             htmlFor="signupId"
@@ -80,7 +103,7 @@ const SignUpComponent = () => {
           </label>
         </div>
         <div className="flex justify-center gap-16 mt-12 mb-4">
-          <button type="button" className="text-yellow-500">
+          <button type="button" className="text-yellow-500" onClick={gotoLogin}>
             이미 Commeow 유저인가요? 로그인
           </button>
           <button
