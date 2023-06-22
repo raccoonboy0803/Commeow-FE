@@ -81,6 +81,7 @@ const Payment = () => {
                 requestBody
                 // { headers }
               );
+              localStorage.setItem('point', data);
             } catch (error) {
               console.error('Error while points request:', error);
             }
