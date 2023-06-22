@@ -26,12 +26,12 @@ const Donation = ({ streamer, onAccess }: IDonation) => {
 
   const donationHandle = async () => {
     try {
-      const { data } = await api.post('/points/donation', {
+      const { data } = await api.post('/points/spend', {
         streamer,
         point: pointValue,
         message: messageValue,
       });
-      console.log(data);
+      console.log('남은포인트값:::::', data);
 
       localStorage.setItem('point', data);
       setCurPoint(data);
