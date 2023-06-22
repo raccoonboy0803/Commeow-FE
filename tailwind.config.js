@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         mainlogo: "url('./assets/commeow.png')",
+        defaultList: "url('./assets/defaultListImg.png')",
       },
     },
   },
