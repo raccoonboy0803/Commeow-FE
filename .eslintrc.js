@@ -22,5 +22,6 @@ module.exports = {
     'react/prop-types': 'off',
     'arrow-body-style': 'off',
     'react/self-closing-comp': 'off',
+    'no-param-reassign': 'off',
   },
 };
