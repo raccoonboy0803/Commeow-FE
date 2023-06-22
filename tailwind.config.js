@@ -7,6 +7,10 @@ module.exports = {
         mainlogo: "url('./assets/commeow.png')",
         defaultList: "url('./assets/defaultListImg.png')",
       },
+      colors: {
+        mainBlack: 'rgb(24,24,27)',
+        modalOuter: 'rgba(0,0,0,0.5)',
+      },
     },
   },
   plugins: [],
