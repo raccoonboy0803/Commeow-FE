@@ -23,5 +23,9 @@ module.exports = {
     'arrow-body-style': 'off',
     'react/self-closing-comp': 'off',
     'no-param-reassign': 'off',
+    'import/no-cycle': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };
