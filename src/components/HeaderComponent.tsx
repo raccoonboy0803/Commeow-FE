@@ -1,9 +1,22 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
+import api from '../shared/api';
 import ModalPortal from '../shared/ModalPortal';
 import SignUpComponent from './SignUpComponent';
 
 const HeaderComponent = () => {
   const [signupModal, setSignupModal] = useState(false);
+
+  const logoutHandle = async () => {
+    try {
+      await api.get('/members/logout');
+      Cookies.remove('accesstoken');
+      Cookies.remove('refreshtoken');
+      localStorage.removeItem('point');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-full h-14 flex">
@@ -19,6 +32,9 @@ const HeaderComponent = () => {
           <SignUpComponent />
         </ModalPortal>
       )}
+      <button type="button" onClick={logoutHandle}>
+        로그아웃
+      </button>
     </div>
   );
 };
