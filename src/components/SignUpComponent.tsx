@@ -48,7 +48,7 @@ const SignUpComponent = () => {
               name="userId"
               value={userId}
               onChange={onChangeHandle}
-              className="border border-black border-solid ml-7 w-4/5 text-yellow-500 h-7"
+              className="border border-black border-solid ml-7 w-4/5 text-yellow-500 h-7 indent-2.5"
             />
           </label>
           <label
@@ -61,7 +61,7 @@ const SignUpComponent = () => {
               name="nickname"
               value={nickname}
               onChange={onChangeHandle}
-              className="border border-black border-solid ml-7 text-yellow-500 w-4/5 h-7"
+              className="border border-black border-solid ml-7 text-yellow-500 w-4/5 h-7 indent-2.5"
             />
           </label>
           <label
@@ -75,7 +75,7 @@ const SignUpComponent = () => {
               type="password"
               value={password}
               onChange={onChangeHandle}
-              className="border border-black border-solid ml-7 w-4/5 text-yellow-500 h-7"
+              className="border border-black border-solid ml-7 w-4/5 text-yellow-500 h-7 indent-2.5"
             />
           </label>
         </div>
