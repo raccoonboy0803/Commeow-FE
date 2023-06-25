@@ -10,6 +10,10 @@ const Payment = () => {
   // const headers = {
   //   Access_Token: `Bearer ${accessToken}`,
   // };
+  const accessToken = Cookies.get('accesstoken');
+  const headers = {
+    Access_Token: `Bearer ${accessToken}`,
+  };
   useEffect(() => {
     const jquery = document.createElement('script');
     jquery.src = 'http://code.jquery.com/jquery-1.12.4.min.js';
@@ -76,10 +80,10 @@ const Payment = () => {
               //   requestBody
               //   // { headers }
               // );
-              const { data } = await api.post(
-                '/points/charge',
-                requestBody
-                // { headers }
+              const { data } = await axios.post(
+                'http://3.34.163.123:8080/points/charge',
+                requestBody,
+                { headers }
               );
               localStorage.setItem('point', data);
             } catch (error) {
@@ -96,12 +100,19 @@ const Payment = () => {
     );
   };
   return (
-    <div>
-      <h3>츄르 상점 o(〃＾▽＾〃)o</h3>
-      <h6>!!테스트 결제로 실제 요금이 발생하지 않습니다.</h6>
-      <label htmlFor="churOption">
+    <div className="p-4">
+      <h3 className="text-xl font-bold mb-2">츄르 상점 o(〃＾▽＾〃)o</h3>
+      <h6 className="text-sm mb-4">
+        !!테스트 결제로 실제 요금이 발생하지 않습니다.
+      </h6>
+      <label htmlFor="churOption" className="text-sm font-medium">
         메뉴판:
-        <select id="churOption" name="churOption" onChange={handleSelectChange}>
+        <select
+          id="churOption"
+          name="churOption"
+          onChange={handleSelectChange}
+          className="border border-gray-300 rounded p-2 w-full"
+        >
           <option value="1200">100츄르</option>
           <option value="3500">300츄르</option>
           <option value="5900">500츄르</option>
@@ -110,7 +121,11 @@ const Payment = () => {
           <option value="23500">2000츄르</option>
         </select>
       </label>
-      <button type="button" onClick={requestPay}>
+      <button
+        type="button"
+        onClick={requestPay}
+        className="bg-blue-500 text-white py-2 px-4 rounded mt-2 w-full"
+      >
         결제하기
       </button>
     </div>

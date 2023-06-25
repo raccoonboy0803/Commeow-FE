@@ -29,44 +29,50 @@ const HeaderComponent = () => {
   };
 
   return (
-    <div className="w-full h-14 flex">
+    <div className="w-full h-14 flex justify-between items-center px-10">
       <div className="bg-mainlogo bg-center bg-cover bg-no-repeat w-24 h-14" />
-      {isLogin && <button type="button">츄르구매</button>}
-      {!isLogin && (
-        <button type="button" onClick={() => setLoginModal(true)}>
-          로그인
-        </button>
-      )}
-      {loginModal && (
-        <ModalPortal>
-          <LoginComponent
-            onAccess={handleLoginModal}
-            setIsLogin={setIsLogin}
-            setSignupModal={setSignupModal}
-            setLoginModal={setLoginModal}
-          />
-        </ModalPortal>
-      )}
+      <div>
+        {isLogin && <button type="button">츄르구매</button>}
+        {!isLogin && (
+          <button
+            type="button"
+            onClick={() => setLoginModal(true)}
+            className="mr-2"
+          >
+            로그인
+          </button>
+        )}
+        {loginModal && (
+          <ModalPortal>
+            <LoginComponent
+              onAccess={handleLoginModal}
+              setIsLogin={setIsLogin}
+              setSignupModal={setSignupModal}
+              setLoginModal={setLoginModal}
+            />
+          </ModalPortal>
+        )}
 
-      {!isLogin && (
-        <button type="button" onClick={() => setSignupModal(true)}>
-          회원가입
-        </button>
-      )}
-      {signupModal && (
-        <ModalPortal>
-          <SignUpComponent
-            onAccess={handleSignModal}
-            setSignupModal={setSignupModal}
-            setLoginModal={setLoginModal}
-          />
-        </ModalPortal>
-      )}
-      {isLogin && (
-        <button type="button" onClick={logoutHandle}>
-          로그아웃
-        </button>
-      )}
+        {!isLogin && (
+          <button type="button" onClick={() => setSignupModal(true)}>
+            회원가입
+          </button>
+        )}
+        {signupModal && (
+          <ModalPortal>
+            <SignUpComponent
+              onAccess={handleSignModal}
+              setSignupModal={setSignupModal}
+              setLoginModal={setLoginModal}
+            />
+          </ModalPortal>
+        )}
+        {isLogin && (
+          <button type="button" onClick={logoutHandle}>
+            로그아웃
+          </button>
+        )}
+      </div>
     </div>
   );
 };
