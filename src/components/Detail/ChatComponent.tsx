@@ -48,7 +48,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   const [streamer, setStreamer] = useState('');
   const [donationAmount, setDonationAmount] = useState('');
   const [client, setClient] = useState<RSocketClient<any, any> | null>(null);
-
+  const [isKeyDown, setIsKeyDown] = useState(false);
   const [isOpen, setIsOpen] = useAtom(donationModalOpenAtom);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const accessToken = Cookies.get('accesstoken');
@@ -84,12 +84,14 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
 
   const closeSocket = () => {
     if (socket) {
+      console.log('disconnect');
       socket.close();
     }
   };
 
   const send = () => {
     if (!accessToken) return;
+    if (!message.trim()) return;
     const sendData: Message = {
       type: 'MESSAGE',
       nickname,
@@ -224,7 +226,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
       })
     );
   };
-
+  window.onpopstate = closeSocket;
   useEffect(() => {
     if (accessToken) {
       const decodedToken: any = jwtDecode(accessToken);
@@ -237,7 +239,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
     iamport.src = 'http://cdn.iamport.kr/js/iamport.payment-1.1.7.js';
     document.head.appendChild(jquery);
     document.head.appendChild(iamport);
-    window.onpopstate = closeSocket;
+
     return () => {
       if (socket) socket.close();
       document.head.removeChild(jquery);
@@ -277,6 +279,19 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         chatContainerRef.current.scrollHeight;
     }
   };
+  useEffect(() => {
+    scrollToBottom();
+  });
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !isKeyDown) {
+      setIsKeyDown(true);
+      send();
+    }
+  };
+
+  const handleKeyUp = () => {
+    setIsKeyDown(false);
+  };
 
   useEffect(() => {
     scrollToBottom();
@@ -290,12 +305,11 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         <h1 className="text-2xl font-bold mb-4">채팅</h1>
         {/* <p className="mb-4">현재 참여자: {participantCount} 명</p> */}
 
-        <div
-          className="h-[50vh] overflow-auto"
-          ref={chatContainerRef}
-          style={{ overflow: 'overlay' }}
-        >
-          <div className="h-full w-[300px]">
+        <div className="h-[50vh]" style={{ overflow: 'overlay' }}>
+          <div
+            className="h-full w-[300px] overflow-auto"
+            ref={chatContainerRef}
+          >
             {messages.map((msg) =>
               msg.type === 'DONATION' ? (
                 <div
@@ -324,6 +338,8 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="메시지 입력"
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
               className="border border-gray-300 rounded p-2 w-full"
             />
             <button
