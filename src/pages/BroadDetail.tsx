@@ -25,9 +25,9 @@ const BroadDetail = () => {
   const { data } = useQuery('getBroadDetail', getBroadDetail);
   console.log('detailData::::', data);
 
-  const handleModal = (newValue: boolean) => {
-    setDonation(newValue);
-  };
+  // const handleModal = (newValue: boolean) => {
+  //   setDonation(newValue);
+  // };
 
   return (
     <div>
