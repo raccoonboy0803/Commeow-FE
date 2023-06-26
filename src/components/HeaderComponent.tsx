@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import api from '../shared/api';
 import ModalPortal from '../shared/ModalPortal';
 import LoginComponent from './LoginComponent';
+import Payment from './Payment/Payment';
 import SignUpComponent from './SignUpComponent';
 
 const HeaderComponent = () => {
   const [signupModal, setSignupModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  const [paymentModal, setPaymentModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
   const logoutHandle = async () => {
@@ -27,11 +29,23 @@ const HeaderComponent = () => {
   const handleLoginModal = (newValue: boolean) => {
     setLoginModal(newValue);
   };
+  const handlePaymentModal = (newValue: boolean) => {
+    setPaymentModal(newValue);
+  };
 
   return (
     <div className="w-full h-14 flex">
       <div className="bg-mainlogo bg-center bg-cover bg-no-repeat w-24 h-14" />
-      {isLogin && <button type="button">츄르구매</button>}
+      {isLogin && (
+        <button type="button" onClick={() => setPaymentModal(true)}>
+          츄르구매
+        </button>
+      )}
+      {paymentModal && (
+        <ModalPortal>
+          <Payment onAccess={handlePaymentModal} />
+        </ModalPortal>
+      )}
       {!isLogin && (
         <button type="button" onClick={() => setLoginModal(true)}>
           로그인

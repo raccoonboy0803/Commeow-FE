@@ -13,6 +13,7 @@ const SignUpComponent = ({
   setSignupModal,
   setLoginModal,
 }: ISignup) => {
+  const [errorCheck, setErrorCheck] = useState('');
   const [inputValue, setInputValue] = useState({
     userId: '',
     nickname: '',
@@ -27,6 +28,7 @@ const SignUpComponent = ({
       ...inputValue,
       [name]: value,
     });
+    setErrorCheck('');
   };
 
   const gotoLogin = () => {
@@ -39,8 +41,8 @@ const SignUpComponent = ({
       await api.post('/members/signup', inputValue);
       onAccess(false);
       navigate('/login');
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorCheck(error.response.data);
     }
   };
 
@@ -66,6 +68,9 @@ const SignUpComponent = ({
             className="text-white font-semibold flex flex-col ml-10"
           >
             아이디
+            {errorCheck === '중복된 아이디입니다.' && (
+              <span className="text-yellow-500">중복된 아이디입니다.</span>
+            )}
             <input
               id="signupId"
               name="userId"
@@ -74,11 +79,15 @@ const SignUpComponent = ({
               className="border border-black border-solid ml-7 w-4/5 text-yellow-500 h-7 indent-2.5"
             />
           </label>
+
           <label
             htmlFor="signupNick"
             className="text-white font-semibold flex flex-col ml-10"
           >
             닉네임
+            {errorCheck === '중복된 닉네임입니다.' && (
+              <span className="text-yellow-500">중복된 닉네임입니다.</span>
+            )}
             <input
               id="signupNick"
               name="nickname"

@@ -3,7 +3,11 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import api from '../../shared/api';
 
-const Payment = () => {
+interface IPayment {
+  onAccess: (newValue: boolean) => void;
+}
+
+const Payment = ({ onAccess }: IPayment) => {
   const [churOption, setChurOption] = useState('100츄르');
   const [churAmount, setChurAmount] = useState(1200);
   // const accessToken = Cookies.get('accesstoken');
@@ -82,6 +86,7 @@ const Payment = () => {
                 // { headers }
               );
               localStorage.setItem('point', data);
+              onAccess(false);
             } catch (error) {
               console.error('Error while points request:', error);
             }
@@ -96,23 +101,40 @@ const Payment = () => {
     );
   };
   return (
-    <div>
-      <h3>츄르 상점 o(〃＾▽＾〃)o</h3>
-      <h6>!!테스트 결제로 실제 요금이 발생하지 않습니다.</h6>
-      <label htmlFor="churOption">
-        메뉴판:
-        <select id="churOption" name="churOption" onChange={handleSelectChange}>
-          <option value="1200">100츄르</option>
-          <option value="3500">300츄르</option>
-          <option value="5900">500츄르</option>
-          <option value="11900">1000츄르</option>
-          <option value="17900">1500츄르</option>
-          <option value="23500">2000츄르</option>
-        </select>
-      </label>
-      <button type="button" onClick={requestPay}>
-        결제하기
-      </button>
+    <div className="w-full h-screen flex justify-center items-center bg-modalOuter">
+      <div className="bg-mainBlack w-2/5 h-1/5 rounded-lg relative flex flex-col items-center justify-center gap-5">
+        <h3 className="text-yellow-500 text-2xl font-bold ">
+          츄르 상점 o(〃＾▽＾〃)o
+        </h3>
+        <h6 className="text-white text-sm font-bold">
+          !!테스트 결제로 실제 요금이 발생하지 않습니다.
+        </h6>
+        <div>
+          <label htmlFor="churOption" className="text-white">
+            메뉴판:
+            <select
+              id="churOption"
+              name="churOption"
+              onChange={handleSelectChange}
+              className="text-black"
+            >
+              <option value="1200">100츄르</option>
+              <option value="3500">300츄르</option>
+              <option value="5900">500츄르</option>
+              <option value="11900">1000츄르</option>
+              <option value="17900">1500츄르</option>
+              <option value="23500">2000츄르</option>
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={requestPay}
+            className="bg-yellow-500 w-16 h-7 ml-5"
+          >
+            결제하기
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

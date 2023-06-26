@@ -39,16 +39,18 @@ const LoginComponent = ({
   const loginHandle = async () => {
     try {
       const response = await api.post('/members/login', inputValue);
-      // console.log('loginRes:::', response);
+      console.log('loginRes:::', response);
 
       const accessHeader = response?.headers?.access_token;
       const refreshHeader = response?.headers?.refresh_token;
+      const streamkeyData = response?.data.streamKey;
 
       const accessToken = accessHeader?.split(' ')[1];
       const refreshToken = refreshHeader?.split(' ')[1];
 
       Cookies.set('accesstoken', accessToken);
       Cookies.set('refreshtoken', refreshToken);
+      Cookies.set('streamkey', streamkeyData);
 
       setIsLogin(true);
       onAccess(false);
