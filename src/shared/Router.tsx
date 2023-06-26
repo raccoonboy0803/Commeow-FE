@@ -14,7 +14,8 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<BroadList />} />
-          <Route path="/broadcasts/:id" element={<BroadDetail />} />
+          {/* <Route path="/broadcasts/:id" element={<BroadDetail />} /> */}
+          <Route path="/broadcasts" element={<BroadDetail />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 import api from '../../shared/api';
 
 interface IPayment {
@@ -10,10 +8,7 @@ interface IPayment {
 const Payment = ({ onAccess }: IPayment) => {
   const [churOption, setChurOption] = useState('100츄르');
   const [churAmount, setChurAmount] = useState(1200);
-  // const accessToken = Cookies.get('accesstoken');
-  // const headers = {
-  //   Access_Token: `Bearer ${accessToken}`,
-  // };
+
   useEffect(() => {
     const jquery = document.createElement('script');
     jquery.src = 'http://code.jquery.com/jquery-1.12.4.min.js';
@@ -35,10 +30,6 @@ const Payment = ({ onAccess }: IPayment) => {
     setChurAmount(Number(event.currentTarget?.value));
   };
   const requestPay = () => {
-    // if (!accessToken) {
-    //   alert('로그인이 필요한 서비스입니다.');
-    //   return;
-    // }
     const { IMP } = window;
     IMP?.init('imp24850211');
     IMP?.request_pay(
@@ -52,15 +43,9 @@ const Payment = ({ onAccess }: IPayment) => {
       },
       async (rsp) => {
         try {
-          // const { data } = await api.post(
-          //   'http://localhost:8080/verifyIamport/' + rsp.imp_uid,
-          //   null,
-          //   { headers }
-          // );
           const { data: verifyData } = await api.post(
             `/verifyIamport/${rsp.imp_uid}`,
             null
-            // { headers }
           );
           if (rsp.paid_amount === verifyData.response.amount) {
             alert('결제가 완료되었습니다.');
@@ -75,16 +60,8 @@ const Payment = ({ onAccess }: IPayment) => {
                 '충천 포인트: ',
                 churOption.substring(0, churOption.length - 2)
               );
-              // const { data } = await axios.post(
-              //   'http://localhost:8080/points/charge',
-              //   requestBody
-              //   // { headers }
-              // );
-              const { data } = await api.post(
-                '/points/charge',
-                requestBody
-                // { headers }
-              );
+
+              const { data } = await api.post('/points/charge', requestBody);
               localStorage.setItem('point', data);
               onAccess(false);
             } catch (error) {
@@ -106,6 +83,13 @@ const Payment = ({ onAccess }: IPayment) => {
         <h3 className="text-yellow-500 text-2xl font-bold ">
           츄르 상점 o(〃＾▽＾〃)o
         </h3>
+        <button
+          type="button"
+          className="text-white absolute top-3 right-3"
+          onClick={() => onAccess(false)}
+        >
+          닫기
+        </button>
         <h6 className="text-white text-sm font-bold">
           !!테스트 결제로 실제 요금이 발생하지 않습니다.
         </h6>

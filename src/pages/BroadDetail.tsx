@@ -32,7 +32,8 @@ const BroadDetail = () => {
   return (
     <div>
       <BroadDetailVideo streamer={data?.data?.streamer} />
-      <button
+
+      {/* <button
         type="button"
         className="bg-yellow-500 w-16 h-7"
         onClick={() => setDonation(true)}
@@ -43,7 +44,7 @@ const BroadDetail = () => {
         <ModalPortal>
           <Donation streamer={data?.data?.streamer} onAccess={handleModal} />
         </ModalPortal>
-      )}
+      )} */}
     </div>
   );
 };
