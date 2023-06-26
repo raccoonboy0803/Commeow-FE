@@ -16,6 +16,7 @@ const LoginComponent = ({
   setSignupModal,
   setLoginModal,
 }: ILogin) => {
+  const [errorCheck, setErrorCheck] = useState('');
   const [inputValue, setInputValue] = useState({
     userId: '',
     password: '',
@@ -29,6 +30,7 @@ const LoginComponent = ({
       ...inputValue,
       [name]: value,
     });
+    setErrorCheck('');
   };
 
   const gotoSignup = () => {
@@ -39,26 +41,27 @@ const LoginComponent = ({
   const loginHandle = async () => {
     try {
       const response = await api.post('/members/login', inputValue);
-      // console.log('loginRes:::', response);
+      console.log('loginRes:::', response);
 
       const accessHeader = response?.headers?.access_token;
       const refreshHeader = response?.headers?.refresh_token;
+      const streamkeyData = response?.data.streamKey;
 
       const accessToken = accessHeader?.split(' ')[1];
       const refreshToken = refreshHeader?.split(' ')[1];
 
       Cookies.set('accesstoken', accessToken);
       Cookies.set('refreshtoken', refreshToken);
+      Cookies.set('streamkey', streamkeyData);
 
       setIsLogin(true);
       onAccess(false);
 
       navigate('/');
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorCheck(error.response.data);
     }
   };
-  // bg-mainBlack
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-modalOuter">
@@ -82,6 +85,11 @@ const LoginComponent = ({
             className="text-white font-semibold flex flex-col ml-10"
           >
             아이디
+            {errorCheck === '존재하지 않는 사용자입니다.' && (
+              <span className="text-yellow-500">
+                존재하지 않는 사용자입니다
+              </span>
+            )}
             <input
               id="signupId"
               name="userId"
@@ -96,6 +104,9 @@ const LoginComponent = ({
             className="text-white font-semibold flex flex-col ml-10"
           >
             패스워드
+            {errorCheck === '비밀번호가 틀렸습니다.' && (
+              <span className="text-yellow-500">비밀번호가 틀렸습니다</span>
+            )}
             <input
               id="signupPwd"
               name="password"
