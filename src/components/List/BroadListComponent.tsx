@@ -23,7 +23,7 @@ const BroadListComponent = () => {
   console.log('broadListData::::', data?.data);
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-8 p-8">
       {data?.data.map((item: IList) => (
         <BroadCard
           key={item.channelId}
