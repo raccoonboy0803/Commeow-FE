@@ -163,6 +163,12 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   const handleDonationAmountChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const inputValue = event.currentTarget.value;
+    if (Number(inputValue) <= 0) {
+      alert('1츄르부터 후원 할수있습니다');
+      setDonationAmount('');
+      return;
+    }
     setDonationAmount(event.target.value);
   };
 
@@ -189,6 +195,8 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         onComplete: (com: any) => {
           console.log('com : ', com);
           setDropdownIsOpen(false);
+          setDonationAmount('');
+          setDonationMessage('');
         },
         onError: (error: any) => {
           toast.error(error.source.message);
@@ -296,6 +304,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
   return (
     <>
       <div

@@ -10,10 +10,15 @@ const BroadCard = ({ channelId, streamer, title, thumbnailFiles }: IList) => {
 
   return (
     <div onClick={intoBroadDetail}>
-      <img
-        src={`data:image/jpeg;base64, ${thumbnailFiles[0]?.fileImg}`}
-        alt="thumbnail"
-      />
+      {thumbnailFiles[0]?.fileImg === undefined ? (
+        <div className="bg-defaultList  bg-center bg-cover bg-no-repeat w-72 h-40" />
+      ) : (
+        <img
+          src={`data:image/jpeg;base64, ${thumbnailFiles[0]?.fileImg}`}
+          alt="thumbnail"
+          className="w-72 h-40"
+        />
+      )}
 
       <div>
         <p className="text-white">{title}</p>

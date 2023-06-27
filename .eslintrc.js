@@ -27,5 +27,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-useless-return': 'off',
   },
 };
