@@ -88,7 +88,10 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   };
 
   const send = () => {
-    if (!accessToken) return;
+    if (!accessToken) {
+      toast.error('로그인이 필요한 서비스입니다.');
+      return;
+    }
     if (!message.trim()) return;
     const sendData: Message = {
       type: 'MESSAGE',
@@ -155,6 +158,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
       });
     }
   };
+  console.log('cookie:::::::::', Cookies.get('accesstoken'));
 
   const handleDonationAmountChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -343,7 +347,6 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyUp}
               className="border border-gray-300 rounded p-2 w-full"
-              disabled={!accessToken}
             />
             <button
               type="button"
