@@ -15,7 +15,6 @@ import { FaPaw } from 'react-icons/fa';
 import { donationModalOpenAtom, handleViewerCountAtom } from './AtomStore';
 import { EchoResponder } from './responder';
 import { Modal } from '../../shared/Modal';
-import Payment from '../Payment/Payment';
 
 interface Message {
   type: string;
@@ -307,7 +306,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   return (
     <>
       <div
-        className="p-4 relative border border-gray-300 rounded-lg ml-2 bg-white"
+        className="p-4 relative border border-gray-300 rounded-lg  bg-white"
         ref={dropdownRef}
       >
         <h1 className="text-2xl font-bold mb-4">채팅</h1>

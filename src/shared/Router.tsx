@@ -18,7 +18,7 @@ const Router = () => {
           <Route path="/" element={<BroadList />} />
           <Route path="/broadcasts/:id" element={<BroadDetail />} />
           {/* <Route path="/snack" element={<SnackBar />} /> */}
-          {/* <Route path="/broadcasts" element={<BroadDetail />} /> */}
+          <Route path="/broadcasts" element={<BroadDetail />} />
           {/* <Route path="/pay" element={<Payment />} /> */}
           {/* <Route path="/header" element={<HeaderComponent />} /> */}
         </Routes>
