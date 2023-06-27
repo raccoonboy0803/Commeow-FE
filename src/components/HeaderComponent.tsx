@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { atom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../shared/api';
@@ -7,6 +8,8 @@ import SnackBar from '../shared/SnackBar';
 import LoginComponent from './LoginComponent';
 import Payment from './Payment/Payment';
 import SignUpComponent from './SignUpComponent';
+
+export const countAtom = atom<number>(0);
 
 const HeaderComponent = () => {
   const [signupModal, setSignupModal] = useState(false);

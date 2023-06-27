@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../shared/api';
-import ModalPortal from '../../shared/ModalPortal';
 import ModalSecondPortal from '../../shared/ModalSecondPortal';
 import SnackBar from '../../shared/SnackBar';
 

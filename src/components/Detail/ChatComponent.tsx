@@ -71,9 +71,9 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
     try {
       const response = await axios.get(
         `http://3.34.163.123:8080/broadcasts/${roomId}`,
-        { headers }
+        { headers } // 체크
       );
-      console.log(response.data);
+
       setStreamer(response.data.streamer);
       setChattingAddress(response.data.chattingAddress);
     } catch (error) {
@@ -83,7 +83,6 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
 
   const closeSocket = () => {
     if (socket) {
-      console.log('disconnect');
       socket.close();
     }
   };
@@ -143,20 +142,18 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   };
 
   const socketConnect = () => {
-    if (client && !socket)
+    if (client && !socket) {
       client.connect().subscribe({
         onComplete: (reactiveSocket) => {
-          console.log('소켓 연결됨');
           setSocket(reactiveSocket);
           subscribeToParticipantCount();
         },
         onError: (error) => {
           toast.error(error.message);
         },
-        onSubscribe: (cancel) => {
-          console.log(cancel);
-        },
+        onSubscribe: (cancel) => {},
       });
+    }
   };
 
   const handleDonationAmountChange = (
@@ -172,7 +169,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
     }
     if (!donationAmount) return;
     if (Number(donationAmount) <= 0) {
-      alert('1츄르부터 후원할 수 있습니다');
+      toast.error('1 츄르부터 후원할 수 있습니다.');
       setDonationAmount('');
       return;
     }
@@ -191,7 +188,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
       })
       .subscribe({
         onComplete: (com: any) => {
-          console.log('com : ', com);
+          console.log('donationcom : ', com);
           setDropdownIsOpen(false);
           setDonationAmount('');
           setDonationMessage('');
@@ -199,9 +196,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         onError: (error: any) => {
           toast.error(error.source.message);
         },
-        onSubscribe: (cancel: any) => {
-          console.log('cancel', cancel);
-        },
+        onSubscribe: (cancel: any) => {},
       });
   };
 
@@ -348,6 +343,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyUp}
               className="border border-gray-300 rounded p-2 w-full"
+              disabled={!accessToken}
             />
             <button
               type="button"
