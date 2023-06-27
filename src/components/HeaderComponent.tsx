@@ -33,7 +33,10 @@ const HeaderComponent = () => {
 
       setIsLogin(false);
     } catch (error) {
-      console.log(error);
+      Cookies.remove('accesstoken');
+      Cookies.remove('refreshtoken');
+      Cookies.remove('streamkey');
+      localStorage.removeItem('point');
     }
   };
   const handleSignModal = (newValue: boolean) => {
