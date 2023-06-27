@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import { inRange } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../shared/api';
@@ -56,7 +55,7 @@ const HeaderComponent = () => {
     <div className="w-full h-14 flex justify-between items-center bg-mainBlack">
       {logoutSnack && (
         <ModalPortal>
-          <SnackBar />
+          <SnackBar newValue="로그아웃 되었습니다" />
         </ModalPortal>
       )}
       <div

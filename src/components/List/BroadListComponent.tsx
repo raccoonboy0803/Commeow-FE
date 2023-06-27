@@ -1,9 +1,5 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 import api from '../../shared/api';
-import { Modal } from '../../shared/Modal';
-import ModalPortal from '../../shared/ModalPortal';
-import SnackBar from '../../shared/SnackBar';
 import BroadCard from './BroadCard';
 
 interface IThumb {
@@ -22,8 +18,7 @@ const BroadListComponent = () => {
     const response = await api.get('/broadcasts');
     return response;
   };
-  const { data, isLoading } = useQuery('getBroadList', getBroadList);
-  console.log('broadListData::::', data?.data);
+  const { data } = useQuery('getBroadList', getBroadList);
 
   return (
     <div className="flex gap-8 p-8">
