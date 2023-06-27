@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../shared/api';
 import ModalPortal from '../shared/ModalPortal';
+import SnackBar from '../shared/SnackBar';
 import LoginComponent from './LoginComponent';
 import Payment from './Payment/Payment';
 import SignUpComponent from './SignUpComponent';
@@ -13,6 +14,7 @@ const HeaderComponent = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [logoutSnack, setLogoutSnack] = useState(false);
   const navigate = useNavigate();
 
   const accessValid = Cookies.get('accesstoken');
@@ -32,6 +34,7 @@ const HeaderComponent = () => {
       localStorage.removeItem('point');
 
       setIsLogin(false);
+      setLogoutSnack(true);
     } catch (error) {
       Cookies.remove('accesstoken');
       Cookies.remove('refreshtoken');
@@ -51,6 +54,11 @@ const HeaderComponent = () => {
 
   return (
     <div className="w-full h-14 flex justify-between items-center bg-mainBlack">
+      {logoutSnack && (
+        <ModalPortal>
+          <SnackBar />
+        </ModalPortal>
+      )}
       <div
         className="bg-mainlogo bg-center bg-cover bg-no-repeat w-24 h-14 ml-5 cursor-pointer"
         onClick={() => navigate('/')}

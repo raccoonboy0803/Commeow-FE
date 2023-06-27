@@ -7,6 +7,7 @@ import BroadList from '../pages/BroadList';
 import Home from '../pages/Home';
 // import ModalPortal from './ModalPortal';
 import Layout from './Layout';
+import SnackBar from './SnackBar';
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<BroadList />} />
           <Route path="/broadcasts/:id" element={<BroadDetail />} />
+          <Route path="/snack" element={<SnackBar />} />
           {/* <Route path="/broadcasts" element={<BroadDetail />} /> */}
           {/* <Route path="/pay" element={<Payment />} /> */}
           {/* <Route path="/header" element={<HeaderComponent />} /> */}
