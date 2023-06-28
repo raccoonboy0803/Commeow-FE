@@ -57,26 +57,43 @@ const HeaderComponent = () => {
   };
 
   return (
-    <div className="w-full h-14 flex justify-between items-center bg-white border-b-1 border-black">
+    <div className="w-full h-14 flex justify-between items-center bg-white border-b-1 border-black ">
       {logoutSnack && (
         <ModalPortal>
           <SnackBar newValue="로그아웃 되었습니다" />
         </ModalPortal>
       )}
       <div
-        className="bg-mainlogo bg-center bg-cover bg-no-repeat w-48 h-14 ml-5 cursor-pointer"
+        className="bg-mainlogo bg-center bg-cover bg-no-repeat w-56 h-14 ml-5 cursor-pointer"
         onClick={() => navigate('/')}
       />
       <div className="mr-8">
         {isLogin && (
-          <button
-            type="button"
-            onClick={() => setPaymentModal(true)}
-            className="bg-yellow-500 w-20 h-8 font-medium rounded"
-          >
-            츄르구매
-          </button>
+          // <button
+          //   type="button"
+          //   onClick={() => setPaymentModal(true)}
+          //   className="bg-yellow-500 w-20 h-8 font-medium rounded"
+          // >
+          //   츄르구매
+          // </button>
+          <div className="flex">
+            <div
+              className="bg-chur bg-cover bg-center bg-no-repeat w-14 h-14 cursor-pointer"
+              onClick={() => setPaymentModal(true)}
+            />
+            <div className="bg-userImg bg-cover bg-no-repeat bg-center w-14 h-14 cursor-pointer" />
+          </div>
         )}
+        {/* {isLogin && (
+          // <button
+          //   type="button"
+          //   onClick={logoutHandle}
+          //   className="bg-yellow-500 w-20 h-8 ml-3 font-medium rounded"
+          // >
+          //   로그아웃
+          // </button>
+    
+        )} */}
         {paymentModal && (
           <ModalPortal>
             <Payment onAccess={handlePaymentModal} />
@@ -119,15 +136,6 @@ const HeaderComponent = () => {
               setLoginModal={setLoginModal}
             />
           </ModalPortal>
-        )}
-        {isLogin && (
-          <button
-            type="button"
-            onClick={logoutHandle}
-            className="bg-yellow-500 w-20 h-8 ml-3 font-medium rounded"
-          >
-            로그아웃
-          </button>
         )}
       </div>
     </div>

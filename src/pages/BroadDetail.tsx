@@ -31,15 +31,15 @@ const BroadDetail = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex ml-4 mr-4 mt-2 w-11/12 h-11/12 gap-3">
+      <div className="flex ml-4 mr-4 mt-4  gap-3 justify-center">
         <div>
           <div className="flex gap-3 mb-4">
             <div className="bg-live bg-center bg-cover bg-no-repeat w-20 h-8" />
-            <p className="text-yellow-500 text-2xl">
-              {data?.data?.title}테스트
-            </p>
+            <p className="text-yellow-500 text-2xl">{data?.data?.title}</p>
           </div>
+
           <BroadDetailVideo streamer={data?.data?.streamer} />
+
           <div className="flex justify-between items-center py-2">
             <div className="bg-defaultList bg-center bg-cover bg-no-repeat w-20 h-20" />
             <div>

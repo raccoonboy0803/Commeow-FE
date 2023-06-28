@@ -306,39 +306,40 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   return (
     <>
       <div
-        className="p-4 relative border border-gray-300 rounded-lg  bg-white"
+        className="p-2 relative border border-gray-300 rounded-lg  bg-white h-[80%]"
         ref={dropdownRef}
       >
         {/* <h1 className="text-2xl font-bold mb-4">채팅</h1> */}
         {/* <p className="mb-4">현재 참여자: {participantCount} 명</p> */}
-
-        <div className="h-[50vh]" style={{ overflow: 'overlay' }}>
-          <div
-            className="h-full w-[320px] overflow-auto"
-            ref={chatContainerRef}
-          >
-            {messages.map((msg) =>
-              msg.type === 'DONATION' ? (
-                <div
-                  key={generateUniqueId()}
-                  className=" bg-yellow-500 rounded p-2 mb-2 px-4"
-                >
-                  <p className="font-bold mb-1 flex items-center">
-                    <FaPaw className="mr-2" />
-                    {msg.nickname} 님이 {msg.points}츄르 후원!
-                  </p>
-                  <p className="flex-wrap">{msg.message}</p>
-                </div>
-              ) : (
-                <div key={generateUniqueId()} className="p-2">
-                  <p className="font-bold mb-1">{msg.nickname} 님:</p>
-                  <p className="flex-wrap">{msg.message}</p>
-                </div>
-              )
-            )}
+        <div className="h-[100vh]">
+          <div className="h-[73%]" style={{ overflow: 'overlay' }}>
+            <div
+              className="h-full w-[320px] overflow-auto"
+              ref={chatContainerRef}
+            >
+              {messages.map((msg) =>
+                msg.type === 'DONATION' ? (
+                  <div
+                    key={generateUniqueId()}
+                    className=" bg-yellow-500 rounded p-2 mb-2 px-4"
+                  >
+                    <p className="font-bold mb-1 flex items-center">
+                      <FaPaw className="mr-2" />
+                      {msg.nickname} 님이 {msg.points}츄르 후원!
+                    </p>
+                    <p className="flex-wrap">{msg.message}</p>
+                  </div>
+                ) : (
+                  <div key={generateUniqueId()} className="p-1 ">
+                    <p className="font-bold mb-1 mr-2">{msg.nickname} 님 : </p>
+                    <p className="flex-wrap">{msg.message}</p>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
-        <div className="flex w-11/12 mt-2 absolute bottom-7">
+        <div className="flex w-11/12 mt-2 absolute bottom-3">
           <div className="relative flex justify-center items-center w-full">
             <input
               type="text"
@@ -347,15 +348,13 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               placeholder="메시지 입력"
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyUp}
-              className="border border-gray-400 bg-gray-200 rounded-lg p-2 w-full focus:outline-yellow-500"
+              className="border border-gray-400 bg-gray-200 rounded-lg p-2 w-full focus:outline-yellow-500 pr-8"
             />
-            <button
-              type="button"
+
+            <div
+              className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8 ml-4 cursor-pointer absolute right-1"
               onClick={handleDropdownToggle}
-              className="absolute right-2"
-            >
-              <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8  ml-4" />
-            </button>
+            />
           </div>
           <button
             type="button"
@@ -374,7 +373,8 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
           <div className="mt-4 absolute bottom-20 bg-white rounded-lg border border-gray-300 shadow-md p-4 w-[300px]">
             <div className="flex items-center mb-2">
               <h2 className="text-lg font-bold ">후원하기</h2>
-              <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8  ml-4" />
+              <span className="text-sm ml-24">보유</span>
+              <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8" />
               <span className="text-sm"> {points}개</span>
             </div>
 

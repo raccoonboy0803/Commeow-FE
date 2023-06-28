@@ -32,7 +32,7 @@ const BroadDetailVideo = ({ streamer }: IBroadDetail) => {
   };
 
   return (
-    <div>
+    <div className="h-[70%]">
       <ReactPlayer
         url={hlsUrl}
         controls
