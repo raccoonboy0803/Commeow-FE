@@ -28,12 +28,12 @@ const BroadListComponent = () => {
           <div className="bg-defaultList bg-center bg-cover bg-no-repeat w-16 h-16" />
         </div>
       </div>
-      <div className="pt-5 pl-10">
+      <div className="pt-5 pl-10 w-4/5">
         <div className="flex items-center gap-2">
           <span className="text-yellow-500 text-2xl">생방송 채널</span>
           <div className="bg-live bg-center bg-cover bg-no-repeat w-20 h-14" />
         </div>
-        <div className="flex gap-12">
+        <div className="flex flex-wrap">
           {data?.data.map((item: IList) => (
             <BroadCard
               key={item.channelId}

@@ -10,7 +10,7 @@ const BroadCard = ({ channelId, streamer, title, thumbnailFiles }: IList) => {
   // const userId = Cookies.get('userId');
 
   return (
-    <div onClick={intoBroadDetail}>
+    <div onClick={intoBroadDetail} className="w-1/4">
       {thumbnailFiles[0]?.fileImg === undefined ? (
         <div className="bg-defaultList2 bg-center bg-cover bg-no-repeat w-64 h-52" />
       ) : (

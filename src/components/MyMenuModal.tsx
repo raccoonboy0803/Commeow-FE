@@ -27,6 +27,7 @@ const MyMenuModal = ({
       Cookies.remove('refreshtoken');
       Cookies.remove('streamkey');
       Cookies.remove('points');
+      Cookies.remove('userId');
 
       setIsLogin(false);
       setLogoutSnack(true);
@@ -40,6 +41,7 @@ const MyMenuModal = ({
         Cookies.remove('refreshtoken');
         Cookies.remove('streamkey');
         Cookies.remove('points');
+        Cookies.remove('userId');
 
         setIsLogin(false);
         setLogoutSnack(true);
