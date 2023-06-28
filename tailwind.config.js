@@ -10,6 +10,8 @@ module.exports = {
         chur: "url('./assets/chur.png')",
         live: "url('./assets/live.png')",
         userImg: "url('./assets/user.png')",
+        broadInfo: "url('./assets/broadInfo.png')",
+        broadManage: "url('./assets/broadManage.png')",
       },
       colors: {
         mainBlack: 'rgb(24,24,27)',
@@ -20,3 +22,5 @@ module.exports = {
   },
   plugins: [require('tailwind-scrollbar-hide')],
 };
+
+// http://3.34.91.101/rere

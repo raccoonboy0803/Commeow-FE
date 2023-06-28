@@ -47,7 +47,7 @@ const LoginComponent = ({
       const refreshHeader = response?.headers?.refresh_token;
       const streamkeyData = response?.data.streamKey;
       const points = response?.data.points;
-      // const userIdkey = response?.data.userId;
+      const userIdkey = response?.data.userId;
 
       const accessToken = accessHeader?.split(' ')[1];
       const refreshToken = refreshHeader?.split(' ')[1];
@@ -56,6 +56,7 @@ const LoginComponent = ({
       Cookies.set('refreshtoken', refreshToken);
       Cookies.set('streamkey', streamkeyData);
       Cookies.set('points', points);
+      Cookies.set('userId', userIdkey);
       // Cookies.set('userId', userIdkey);
 
       setIsLogin(true);

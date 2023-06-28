@@ -50,8 +50,9 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   const [isKeyDown, setIsKeyDown] = useState(false);
   const [isOpen, setIsOpen] = useAtom(donationModalOpenAtom);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const accessToken = Cookies.get('accesstoken');
   const points = Cookies.get('points');
+  const accessToken = Cookies.get('accesstoken');
+  const [pointChange, setPointChange] = useState(false);
   const headers = {
     Access_Token: `Bearer ${accessToken}`,
   };
@@ -194,6 +195,8 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
       .subscribe({
         onComplete: (com: any) => {
           console.log('donationcom : ', com);
+          Cookies.set('points', com.data.remainPoints);
+          setPointChange(true);
           setDropdownIsOpen(false);
           setDonationAmount('');
           setDonationMessage('');
@@ -375,7 +378,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               <h2 className="text-lg font-bold ">후원하기</h2>
               <span className="text-sm ml-24">보유</span>
               <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8" />
-              <span className="text-sm"> {points}개</span>
+              <span className="text-sm">{points}개</span>
             </div>
 
             <input
