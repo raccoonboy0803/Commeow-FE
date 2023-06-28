@@ -6,6 +6,8 @@ module.exports = {
       backgroundImage: {
         mainlogo: "url('./assets/commeow.png')",
         defaultList: "url('./assets/defaultListImg.png')",
+        chur: "url('./assets/chur.png')",
+        live: "url('./assets/live.png')",
       },
       colors: {
         mainBlack: 'rgb(24,24,27)',

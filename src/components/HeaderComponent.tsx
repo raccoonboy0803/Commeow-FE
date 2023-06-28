@@ -33,6 +33,7 @@ const HeaderComponent = () => {
       Cookies.remove('accesstoken');
       Cookies.remove('refreshtoken');
       Cookies.remove('streamkey');
+      Cookies.remove('points');
       localStorage.removeItem('point');
 
       setIsLogin(false);
@@ -41,6 +42,7 @@ const HeaderComponent = () => {
       Cookies.remove('accesstoken');
       Cookies.remove('refreshtoken');
       Cookies.remove('streamkey');
+      Cookies.remove('points');
       localStorage.removeItem('point');
     }
   };

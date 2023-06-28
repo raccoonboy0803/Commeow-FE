@@ -51,6 +51,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
   const [isOpen, setIsOpen] = useAtom(donationModalOpenAtom);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const accessToken = Cookies.get('accesstoken');
+  const points = Cookies.get('points');
   const headers = {
     Access_Token: `Bearer ${accessToken}`,
   };
@@ -308,7 +309,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         className="p-4 relative border border-gray-300 rounded-lg  bg-white"
         ref={dropdownRef}
       >
-        <h1 className="text-2xl font-bold mb-4">채팅</h1>
+        {/* <h1 className="text-2xl font-bold mb-4">채팅</h1> */}
         {/* <p className="mb-4">현재 참여자: {participantCount} 명</p> */}
 
         <div className="h-[50vh]" style={{ overflow: 'overlay' }}>
@@ -320,7 +321,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               msg.type === 'DONATION' ? (
                 <div
                   key={generateUniqueId()}
-                  className=" bg-green-200 rounded p-2 mb-2 px-4"
+                  className=" bg-yellow-500 rounded p-2 mb-2 px-4"
                 >
                   <p className="font-bold mb-1 flex items-center">
                     <FaPaw className="mr-2" />
@@ -346,20 +347,20 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
               placeholder="메시지 입력"
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyUp}
-              className="border border-gray-300 rounded p-2 w-full"
+              className="border border-gray-400 bg-gray-200 rounded-lg p-2 w-full focus:outline-yellow-500"
             />
             <button
               type="button"
               onClick={handleDropdownToggle}
               className="absolute right-2"
             >
-              💲
+              <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8  ml-4" />
             </button>
           </div>
           <button
             type="button"
             onClick={send}
-            className="bg-blue-500 text-white py-2 px-4 rounded ml-2 min-w-[64px]"
+            className="bg-yellow-500 py-2 px-4 rounded-lg ml-2 min-w-[64px]"
           >
             전송
           </button>
@@ -371,7 +372,11 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
         )} */}
         {dropdownIsOpen && (
           <div className="mt-4 absolute bottom-20 bg-white rounded-lg border border-gray-300 shadow-md p-4 w-[300px]">
-            <h2 className="text-lg font-bold mb-2">후원하기</h2>
+            <div className="flex items-center mb-2">
+              <h2 className="text-lg font-bold ">후원하기</h2>
+              <div className="bg-chur bg-center bg-cover bg-no-repeat w-8 h-8  ml-4" />
+              <span className="text-sm"> {points}개</span>
+            </div>
 
             <input
               type="text"
@@ -391,7 +396,7 @@ const ChatComponent = ({ roomId }: { roomId: string }) => {
             <button
               type="button"
               onClick={donation}
-              className="bg-blue-500 text-white py-2 px-4 rounded w-full"
+              className="bg-yellow-500 text-white py-2 px-4 rounded w-full"
             >
               후원하기
             </button>
