@@ -57,14 +57,14 @@ const HeaderComponent = () => {
   };
 
   return (
-    <div className="w-full h-14 flex justify-between items-center bg-headerBlack border-b-1 border-black">
+    <div className="w-full h-14 flex justify-between items-center bg-white border-b-1 border-black">
       {logoutSnack && (
         <ModalPortal>
           <SnackBar newValue="로그아웃 되었습니다" />
         </ModalPortal>
       )}
       <div
-        className="bg-mainlogo bg-center bg-cover bg-no-repeat w-32 h-14 ml-5 cursor-pointer"
+        className="bg-mainlogo bg-center bg-cover bg-no-repeat w-48 h-14 ml-5 cursor-pointer"
         onClick={() => navigate('/')}
       />
       <div className="mr-8">
@@ -72,7 +72,7 @@ const HeaderComponent = () => {
           <button
             type="button"
             onClick={() => setPaymentModal(true)}
-            className="bg-yellow-500 w-20 h-8 font-semibold rounded"
+            className="bg-yellow-500 w-20 h-8 font-medium rounded"
           >
             츄르구매
           </button>
@@ -86,7 +86,7 @@ const HeaderComponent = () => {
           <button
             type="button"
             onClick={() => setLoginModal(true)}
-            className="bg-yellow-500 w-20 h-8 font-semibold rounded"
+            className="bg-yellow-500 w-20 h-8 rounded font-medium"
           >
             로그인
           </button>
@@ -106,7 +106,7 @@ const HeaderComponent = () => {
           <button
             type="button"
             onClick={() => setSignupModal(true)}
-            className="bg-yellow-500 w-20 h-8 ml-3 font-semibold rounded"
+            className="bg-yellow-500 w-20 h-8 ml-3 font-medium rounded"
           >
             회원가입
           </button>
@@ -124,7 +124,7 @@ const HeaderComponent = () => {
           <button
             type="button"
             onClick={logoutHandle}
-            className="bg-yellow-500 w-20 h-8 ml-3 font-semibold rounded"
+            className="bg-yellow-500 w-20 h-8 ml-3 font-medium rounded"
           >
             로그아웃
           </button>
