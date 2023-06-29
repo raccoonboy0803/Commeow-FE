@@ -34,7 +34,7 @@ api.interceptors.response.use(
     } = error;
 
     if (status === 500) {
-      toast.error('로그인 만료 시간이 다 되었습니다. 재로그인해주세요');
+      toast.error('로그인 만료시간이 끝났습니다.');
       Cookies.remove('accesstoken');
       Cookies.remove('refreshtoken');
       Cookies.remove('streamkey');
